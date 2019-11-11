@@ -23,21 +23,22 @@
 <script>
     var canvas = document.querySelector("#myCanvas");
     var ctx = canvas.getContext("2d");
+    let x = 0;
+    let y = 0;
     color = "red";
     // ctx.fillStyle = color;
 
+    const rect = canvas.getBoundingClientRect();
     // draw();
 
     function resizeCanvas() {
-        var canvs = document.getElementById("myCanvas");
-        canvs.width = window.innerWidth * 0.8;
-        canvs.height = window.innerHeight * 0.8;
+        canvas.width = window.innerWidth * 0.8;
+        canvas.height = window.innerHeight * 0.8;
     }
 
     function draw(posX, posY) {
         ctx.fillStyle = color;
         ctx.beginPath();
-        ctx.lineWidth = "5";
         // ctx.fillStyle = "#fc0505";
         // first 2 numbers are the x an y - get these to move
         ctx.arc(posX, posY, 10, 0, 2 * Math.PI);
@@ -50,9 +51,10 @@
         console.log(e);
         console.log(e.x);
         console.log(e.y);
-
+        x = e.clientX - rect.left;
+        y = e.clientY - rect.top;
         if (should_draw == 1) {
-            draw(e.x, e.y);
+            draw(x, y);
         }
     })
 
