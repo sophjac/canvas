@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drawing Area</title>
+    <!-- You can add your style here rather than in an external style sheet. -->
+    <style>
+        canvas {
+            border: 5px solid #d3d3d3;
+            background-color: #f1f1f1;
+            display: block;
+            height: 80%;
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id="myCanvas" width="350" height="500"></canvas>
+    <input type="color" id="picker" />
+</body>
+
+<script>
+    var canvas = document.querySelector("#myCanvas");
+    var ctx = canvas.getContext("2d");
+    color = "red";
+    // ctx.fillStyle = color;
+
+    // draw();
+
+    function draw(posX, posY) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.lineWidth = "5";
+        // ctx.fillStyle = "#fc0505";
+        // first 2 numbers are the x an y - get these to move
+        ctx.arc(posX, posY, 10, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+
+    var should_draw = 1;
+
+    canvas.addEventListener("mousemove", function(e) {
+        console.log(e);
+        console.log(e.x);
+        console.log(e.y);
+
+        if (should_draw == 1) {
+            draw(e.x, e.y);
+        }
+    })
+
+    window.addEventListener("keydown", function(e) {
+        if (event.key == "g") {
+            color = "green";
+        }
+        if (event.key == "b") {
+            color = "blue";
+        }
+        if (event.key == "r") {
+            color = "red";
+        }
+        if (event.key == "y") {
+            color = "yellow";
+        }
+        if (event.keyCode == 32) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        if (event.key == "ArrowUp") {
+            should_draw = 0;
+        }
+        if (event.key == "ArrowDown") {
+            should_draw = 1;
+        }
+        console.log(e);
+    })
+
+    picker.addEventListener("change", function() {
+        color = document.getElementById('picker').value;
+        console.log(color);
+    })
+</script>
+
+</html>
