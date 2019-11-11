@@ -10,13 +10,11 @@
             border: 5px solid #d3d3d3;
             background-color: #f1f1f1;
             display: block;
-            height: 80%;
-            width: 80%;
         }
     </style>
 </head>
 
-<body>
+<body onload="resizeCanvas()" ;>
     <!-- DO NOT MODIFY THIS HTML -->
     <canvas id="myCanvas" width="350" height="500"></canvas>
     <input type="color" id="picker" />
@@ -29,6 +27,12 @@
     // ctx.fillStyle = color;
 
     // draw();
+
+    function resizeCanvas() {
+        var canvs = document.getElementById("myCanvas");
+        canvs.width = window.innerWidth * 0.8;
+        canvs.height = window.innerHeight * 0.8;
+    }
 
     function draw(posX, posY) {
         ctx.fillStyle = color;
